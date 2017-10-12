@@ -1,0 +1,9 @@
+/**app.wxss**/
+.containerAll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 10rpx;
+  box-sizing: border-box;
+} 
