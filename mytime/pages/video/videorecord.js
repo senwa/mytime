@@ -159,6 +159,7 @@ Page({
           that.data.uploader = uploadTask;
           if (res.progress<=99){
             p = res.progress;
+            that.data.isWaiting = false;
           }else{
             p = 99;
             that.data.isWaiting=true;
@@ -207,6 +208,7 @@ Page({
           that.data.uploader = uploadTask;
           if (res.progress <= 99) {
             p = res.progress;
+            that.data.isWaiting = false;
           } else {
             p = 99;
             that.data.isWaiting = true;
@@ -251,6 +253,7 @@ Page({
           that.data.uploader = uploadTask;
           if (res.progress <= 99) {
             p = res.progress;
+            that.data.isWaiting = false;
           } else {
             p = 99;
             that.data.isWaiting = true;
