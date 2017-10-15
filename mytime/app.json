@@ -10,5 +10,6 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "时光线",
     "navigationBarTextStyle": "black"
-  }
+  },
+"debug":true
 }

@@ -4,3 +4,25 @@
 <button bindtap="picRecord">图片记录</button>
 <button bindtap="audioRecord">录音记录</button>
 <button bindtap="toRecordList"> 浏览</button>
+<button type="default" bindtap="clickbtn">
+  显示进度条
+</button>
+<view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+<view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+<!--对话框标题-->
+<view class="dialog-title">
+  上传中<image wx:if="{{isWaiting}}" style='width:16px;height:16px;' src='https://www.mytime.net.cn/loading1.gif'></image>
+</view>
+<!--对话框输入部分-->
+<view class="input-view">
+  <progress percent="{{progressPercent}}" show-info active stroke-width="12" activeColor="#09BB07"/>
+</view>
+<!--对话框按钮-->
+<view class="line-top"></view>
+<view class="btn-view">
+  <view class="btn-cancel" bindtap="click_cancel">  
+          取 消
+  </view>
+</view>
+  
+</view>
