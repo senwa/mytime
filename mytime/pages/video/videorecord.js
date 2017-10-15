@@ -161,13 +161,13 @@ Page({
             p = res.progress;
           }else{
             p = 99;
-            isWaiting=true;
+            that.data.isWaiting=true;
           } 
           that.setData({ 
             progressPercent: p, 
             totalBytesSent: res.totalBytesSent, 
             totalBytesExpectedToSend: res.totalBytesExpectedToSend,
-            isWaiting: isWaiting
+            isWaiting: that.data.isWaiting
           });
           console.log('上传进度', res.progress)
           console.log('已经上传的数据长度', res.totalBytesSent)
@@ -209,13 +209,13 @@ Page({
             p = res.progress;
           } else {
             p = 99;
-            isWaiting = true;
+            that.data.isWaiting = true;
           }
           that.setData({
             progressPercent: p,
             totalBytesSent: res.totalBytesSent,
             totalBytesExpectedToSend: res.totalBytesExpectedToSend,
-            isWaiting: isWaiting
+            isWaiting: that.data.isWaiting
           });
           console.log('上传进度', res.progress);
           console.log('已经上传的数据长度', res.totalBytesSent);
@@ -253,13 +253,13 @@ Page({
             p = res.progress;
           } else {
             p = 99;
-            isWaiting = true;
+            that.data.isWaiting = true;
           }
           that.setData({
             progressPercent: p,
             totalBytesSent: res.totalBytesSent,
             totalBytesExpectedToSend: res.totalBytesExpectedToSend,
-            isWaiting: isWaiting
+            isWaiting: that.data.isWaiting
           });
           console.log('上传进度', res.progress)
           console.log('已经上传的数据长度', res.totalBytesSent)
