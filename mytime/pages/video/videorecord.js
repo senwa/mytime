@@ -132,7 +132,7 @@ Page({
     wx.chooseVideo({
       count: 1,
       sourceType: [/*'album'*/, 'camera'],
-      maxDuration: 120,
+      maxDuration: 60,
       camera: 'back',
       success: function (res) {
         that.showModal();
@@ -150,6 +150,13 @@ Page({
             wx.showToast({
               title: '上传成功',
               icon: 'success',
+              duration: 2300
+            });
+          },
+          fail:function(){
+            wx.showToast({
+              title: '上传失败',
+              icon: 'fail',
               duration: 2300
             });
           }
