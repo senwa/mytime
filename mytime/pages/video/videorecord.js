@@ -1,4 +1,6 @@
 // pages/video/videorecord.js
+//获取应用实例
+const app = getApp();
 Page({
 
   /**
@@ -130,10 +132,9 @@ Page({
     });*/
     var that = this;
     wx.chooseVideo({
-      count: 1,
       sourceType: [/*'album'*/, 'camera'],
-      maxDuration: 60,
-      camera: 'back',
+      compressed:false,
+      maxDuration: 50,
       success: function (res) {
         that.showModal();
         var tempFilePath = res.tempFilePath;
@@ -142,7 +143,11 @@ Page({
           filePath: tempFilePath,
           name: 'file',
           formData: {
-            'user': 'test'
+            'duration': res.duration,
+            'height':res.height,
+            'size':res.size,
+            'width':res.width,
+            'user': app.globalData.userInfo
           },
           success: function (res) {
             var data = res.data;
@@ -181,6 +186,14 @@ Page({
           console.log('已经上传的数据长度', res.totalBytesSent)
           console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
         });
+      },fail:function(){
+          wx.showToast({
+              title: '拍摄视频失败',
+              icon: 'fail',
+              duration: 2300
+          });
+      },complete:function(res){
+        console.log(res);
       }
     });
 

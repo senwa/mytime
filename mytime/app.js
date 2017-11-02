@@ -2,14 +2,40 @@
 App({
   onLaunch: function () {
     // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+    //var logs = wx.getStorageSync('logs') || []
+    //logs.unshift(Date.now())
+    //wx.setStorageSync('logs', logs)
 
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        //发起网络请求
+        if(res.code){
+			console.log(res);
+          //wx.request({
+           // url: 'https://www.mytime.net.cn/onWxLogin',
+           // data: {
+           //   code: res.code
+           // }
+          //});
+        }else{
+          wx.showToast({
+            title: '获取用户登录态失败！' + res.errMsg,
+            icon: 'fail',
+            duration: 2300
+          });
+        }     
+      },fail:res=>{
+        var title ='获取用户登录态失败！';
+        if(res){
+          title +=  res.errMsg;
+        }
+        wx.showToast({
+          title: title,
+          icon: 'fail',
+          duration: 2300
+        });
       }
     })
     // 获取用户信息
@@ -29,6 +55,8 @@ App({
               }
             }
           })
+        }else{
+
         }
       }
     })
