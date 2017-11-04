@@ -2,48 +2,87 @@
 page{
   height:100%;
   width:100%;
-  background-attachment: fixed;
+ /* background-attachment: fixed;
   background-repeat:  no-repeat;
   background-color: #ccc;
   background-size: contain;
-  background-image: url("https://www.mytime.net.cn/timg8.jpg");
+  background-image: url("https://www.mytime.net.cn/timg8.jpg");*/
 }
-
-.userinfo {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-top:0px;
+.container { 
+ height: 100%; 
+ display: flex; 
+ flex-direction: column; 
+ padding: 0; 
+ box-sizing: border-box; 
+ background-color: #f2f2f2
+} 
+  
+/*登录图片*/
+.login-icon{ 
+ flex: none; 
+} 
+.login-img{ 
+ width: 100%; 
+} 
+  
+/*表单内容*/
+.login-from { 
+ margin-top:22px; 
+ flex: auto; 
+ height:100%; 
+} 
+  
+.inputView { 
+ background-color: #fff; 
+ line-height: 44px; 
+} 
+/*输入框*/
+.nameImage, .keyImage { 
+ margin-left: 22px; 
+ width: 14px; 
+ height: 14px
+} 
+  
+.loginLab { 
+ margin: 15px 15px 15px 10px; 
+ color: #545454; 
+ font-size: 14px
+} 
+.inputText { 
+ flex: block; 
+ float: right; 
+ text-align: right; 
+ margin-right: 22px; 
+ margin-top: 11px; 
+ color: #cccccc; 
+ font-size: 14px
+} 
+  
+.line { 
+ width: 100%; 
+ height: 1px; 
+ background-color: #cccccc; 
+ margin-top: 1px; 
+} 
+/*按钮*/
+.loginBtnView { 
+ width: 100%; 
+ height: auto; 
+ background-color: #f2f2f2; 
+ margin-top: 0px; 
+ margin-bottom: 0px; 
+ padding-bottom: 0px; 
+} 
+  
+.loginBtn { 
+ width: 80%; 
+ margin-top: 35px; 
 }
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #cfcfcf;
-}
-.loginBtn{
-  background-color: green;
-  border:2px double #fff;
-  color:cornsilk;
-  margin: 20rpx;
-  border-radius:20%;
-}
-.beginBtn{
-  margin-bottom:20px;
-  background-color: green;
-  border:2px double #fff;
-  color:cornsilk;
-}
-.usermotto {
-  width:100%;
-  text-align: center;
-  color:#ffffff;
-  font-size:13px;
+.registerBtn{
   position: absolute;
-  bottom:5%;
+  bottom:1%;
+  right:1%;
+  border:none!important;
+  text-decoration: underline;
+  color:blue!important;
 }

@@ -12,13 +12,7 @@ App({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         //发起网络请求
         if(res.code){
-			console.log(res);
-          //wx.request({
-           // url: 'https://www.mytime.net.cn/onWxLogin',
-           // data: {
-           //   code: res.code
-           // }
-          //});
+			    
         }else{
           wx.showToast({
             title: '获取用户登录态失败！' + res.errMsg,
@@ -37,13 +31,14 @@ App({
           duration: 2300
         });
       }
-    })
+    });
     // 获取用户信息
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
+            withCredentials:true,
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
@@ -53,6 +48,12 @@ App({
               if (this.userInfoReadyCallback) {
                 this.userInfoReadyCallback(res)
               }
+            },fail:function(){
+              wx.showToast({
+                title: '获取用户信息失败',
+                icon: 'fail',
+                duration: 2300
+              });
             }
           })
         }else{
