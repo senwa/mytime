@@ -1,5 +1,5 @@
 var app = getApp()
-// var step = 1 // 当前操作的step
+// var step = 3 // 当前操作的step
 var maxTime = 60
 var currentTime = maxTime //倒计时的事件（单位：s）
 var interval = null
@@ -21,10 +21,10 @@ Page({
     location: "中国(+86)",
     nextButtonWidth: 0,
     step: step_g,
-    time: currentTime
+    time: '('+currentTime+'s)'
   },
   onLoad: function () {
-    step_g = 1
+    step_g = 3;
     var that = this
     wx.getSystemInfo({
       success: function (res) {
@@ -50,12 +50,15 @@ Page({
         interval = setInterval(function () {
           currentTime--;
           that.setData({
-            time: currentTime
+            time: '('+currentTime+'s)'
           })
 
           if (currentTime <= 0) {
-            clearInterval(interval)
-            currentTime = -1
+            clearInterval(interval);
+            currentTime = -1;
+            that.setData({
+              time: ''
+            });
           }
         }, 1000)
       }
@@ -155,14 +158,19 @@ function secondStep() { // 提交［验证码］
 
 function thirdStep() { // 提交［密码］和［重新密码］
 
-  console.log(password + "===" + rePassword)
+
+  console.log(account+"=="+password + "===" + rePassword)
+  if (!account){
+    hintMsg = "请输入登录账号";
+    return false
+  }
 
   if (!check.isContentEqual(password, rePassword)) {
     hintMsg = "两次密码不一致！"
     return false
   }
 
-  if (webUtils.submitPassword(password)) {
+  if (webUtils.submitPassword(account,password)) {
     hintMsg = "注册成功"
     return true
   }

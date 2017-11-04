@@ -24,7 +24,7 @@
         </view>
         <text class="grayLineHeng" />
 
-        <button bindtap="reSendPhoneNum" size="mini" style="margin-top:23rpx;margin-right:23rpx">重新获取({{time}}s)</button>
+        <button bindtap="reSendPhoneNum" size="mini" style="margin-top:23rpx;margin-right:23rpx">重新获取{{time}}</button>
     </view>
 
     <!--第三步-->

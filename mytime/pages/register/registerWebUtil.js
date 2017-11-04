@@ -36,9 +36,11 @@ function submitIdentifyCode(identifyCode) {
 }
 
 // 提交［密码］,前一步保证两次密码输入相同
-function submitPassword(password) {
-  //此处调用wx中的网络请求的API，完成密码的提交
-  return true
+function submitPassword(account,password) {
+  //此处调用wx中的网络请求的API，完成密码的提交/auth/register
+
+
+  return true;
 }
 
 module.exports = {
