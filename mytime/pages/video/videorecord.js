@@ -132,7 +132,7 @@ Page({
     });*/
     var that = this;
     wx.chooseVideo({
-      sourceType: [/*'album'*/, 'camera'],
+      sourceType: [/*'album',*/ 'camera'],
       compressed:false,
       maxDuration: 50,
       success: function (res) {
@@ -142,12 +142,12 @@ Page({
           url: 'https://www.mytime.net.cn/upload',
           filePath: tempFilePath,
           name: 'file',
+          header: { Authorization: 'time'+app.globalData.token},
           formData: {
             'duration': res.duration,
             'height':res.height,
             'size':res.size,
-            'width':res.width,
-            'user': app.globalData.userInfo
+            'width':res.width
           },
           success: function (res) {
             var data = res.data;
@@ -202,16 +202,17 @@ Page({
     var that = this;
     wx.chooseImage({
       count: 1,
-      sourceType: [/*'album'*/, 'camera'],
+      sourceType: [/*'album',*/ 'camera'],
       success: function (res) {
         that.showModal();
         var tempFilePaths = res.tempFilePaths
         const uploadTask = wx.uploadFile({
           url: 'https://www.mytime.net.cn/upload',
           filePath: tempFilePaths[0],
+          header: { Authorization: 'time' + app.globalData.token },
           name: 'file',
           formData: {
-            'user': 'test'
+            
           },
           success: function (res) {
             var data = res.data;
@@ -254,9 +255,10 @@ Page({
         const uploadTask = wx.uploadFile({
           url: 'https://www.mytime.net.cn/upload',
           filePath: tempFilePath,
+          header: { Authorization: 'time' + app.globalData.token },
           name: 'file',
           formData: {
-            'user': 'test'
+            
           },
           success: function (res) {
             var data = res.data;

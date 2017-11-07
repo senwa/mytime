@@ -23,7 +23,6 @@
             <input bindchange="input_identifyCode" style="margin:24rpx 32rpx 0 0;height:49rpx;" placeholder="请输入验证码" type="number"/>
         </view>
         <text class="grayLineHeng" />
-
         <button bindtap="reSendPhoneNum" size="mini" style="margin-top:23rpx;margin-right:23rpx">重新获取{{time}}</button>
     </view>
 

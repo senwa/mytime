@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+      pageSize:20,
+      currentPage:1
   },
 
   /**
@@ -21,14 +22,12 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    if (app.globalData.userInfo){
+    if (app.globalData.token){
       wx.request({
         method:'GET',
-        url: 'https://www.mytime.net.cn/getFileNames', //仅为示例，并非真实的接口地址
-        data: app.globalData.userInfo,
-        header: {
-          'content-type': 'application/json' // 默认值
-        },
+        header: { Authorization: 'time' + app.globalData.token },
+        url: 'https://www.mytime.net.cn/getFileNames', 
+        data: { currentPage: currentPage, pageSize: pageSize},
         success: res =>  {
           console.log(res.data);
           if(res.data&&res.data.result==1){
