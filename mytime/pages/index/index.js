@@ -7,6 +7,12 @@ Page({
     motto: '每天记录生命中的一点点,在未来的日子里慢慢品味',
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
+  /**
+  * 用户点击右上角分享
+  */
+  onShareAppMessage: function () {
+
+  },
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
@@ -19,12 +25,16 @@ Page({
     })
   },
   onLoad: function () { 
-   /* if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+    if (app.globalData.token) {//直接登录跳转
+      wx.showToast({
+        title: '自动登录',
+        icon: 'loading',
+        duration: 2000
       });
-    }*/ 
+      wx.navigateTo({
+        url: '../video/videorecord'
+      });
+    }
   },
   register:function(){
     //注册,跳转到注册页面
@@ -76,5 +86,5 @@ Page({
   },
   pwdInput: function (e) {
     pwd = e.detail.value
-  },
+  }
 })

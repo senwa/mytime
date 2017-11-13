@@ -32,7 +32,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (!app.globalData.token){//发现未登录,跳转到登录页面
+      wx.navigateTo({
+        url: "../index/index"
+      })
+    }
   },
 
   /**
@@ -66,9 +70,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  },
+ // onShareAppMessage: function () {},
   showModal: function () {
     // 显示遮罩层
     var animation = wx.createAnimation({
@@ -136,6 +138,7 @@ Page({
       compressed:false,
       maxDuration: 50,
       success: function (res) {
+        console.log(res);
         that.showModal();
         var tempFilePath = res.tempFilePath;
         const uploadTask = wx.uploadFile({

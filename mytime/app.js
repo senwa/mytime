@@ -6,15 +6,5 @@ App({
     this.globalData = {};
     var token = wx.getStorageSync('token') ;
     this.globalData.token = token;
-    if(token){//直接登录跳转
-      wx.showToast({
-        title: '自动登录',
-        icon: 'loading',
-        duration: 2000
-      });
-      wx.navigateTo({
-        url: '../video/videorecord'
-      });
-    }
   }
 })

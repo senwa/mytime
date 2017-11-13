@@ -1,14 +1,15 @@
 // pages/videoList/videoList.js
 //获取应用实例
 const app = getApp()
+var pageSize = 20;
+var currentPage = 1;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-      pageSize:20,
-      currentPage:1
+     
   },
 
   /**
