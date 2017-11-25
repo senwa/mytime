@@ -28,7 +28,7 @@ Page({
         method:'GET',
         header: { Authorization: 'time' + app.globalData.token },
         url: 'https://www.mytime.net.cn/getFileNames', 
-        data: { currentPage: currentPage, pageSize: pageSize},
+        data: { page: 0, pageSize: 20},
         success: res =>  {
           console.log(res.data);
           if(res.data&&res.data.result==1){
