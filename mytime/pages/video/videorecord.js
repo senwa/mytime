@@ -130,10 +130,10 @@ Page({
     });*/
     var that = this;
     wx.chooseVideo({
-      count: 1,
-      sourceType: [/*'album'*/, 'camera'],
-      maxDuration: 120,
-      camera: 'back',
+     // count: 1,
+      sourceType: ['album', 'camera'],
+      //maxDuration: 120,
+      //camera: 'back',
       success: function (res) {
         that.showModal();
         var tempFilePath = res.tempFilePath;

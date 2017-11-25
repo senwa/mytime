@@ -6,7 +6,7 @@ page{
   background-repeat:  no-repeat;
   background-color: #ccc;
   background-size: contain;
-  background-image: url("https://www.mytime.net.cn/timg8.jpg");
+  background-image: url("https://www.mytime.net.cn/res/timg8.jpg");
 }
 
 .userinfo {

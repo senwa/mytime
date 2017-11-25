@@ -40,6 +40,21 @@ Page({
             }
           }else{
             console.error(res);
+            var msg ='';
+            if (res.data.message =="Access Denied"){
+              msg+='您没有权限';
+            }
+
+            wx.showModal({
+              title: '获取失败',
+              content: msg,
+              showCancel:false,
+              success: function (res) {
+                wx.navigateBack({
+                  delta: 1
+                });
+              }
+            });
           }
         },
         fail: function (res){
