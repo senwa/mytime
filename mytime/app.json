@@ -3,13 +3,14 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/video/videorecord",
-    "pages/videoList/videoList"
+    "pages/videoList/videoList",
+    "pages/register/register"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "时光线",
+    "navigationBarTitleText": "时光笔记",
     "navigationBarTextStyle": "black"
   },
-"debug":true
+  "debug": true
 }

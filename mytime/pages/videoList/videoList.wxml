@@ -2,15 +2,15 @@
 <scroll-view scroll-y >
   <block wx:for="{{records}}" wx:key="fileName">
     <view wx:if="{{item.fileType == 'jpg'}}">
-      <image mode='scaleToFill' style="width:50px; height:50px; background-color: #eeeeee;" src='https://www.mytime.net.cn/{{item.fileName}}'>
+      <image mode='scaleToFill' style="width:50px; height:50px; background-color: #eeeeee;" src='https://www.mytime.net.cn/res/{{item.fileName}}'>
       </image> {{item.fileSize}}--- {{item.fileType}}
     </view>
     <view wx:elif="{{item.fileType == 'mp4'}}">
-      <image mode='scaleToFill' style="width:50px; height:50px; background-color: #eeeeee;" src='https://www.mytime.net.cn/file_mp4.png'>
+      <image mode='scaleToFill' style="width:50px; height:50px; background-color: #eeeeee;" src='https://www.mytime.net.cn/res/file_mp4.png'>
       </image> {{item.fileSize}}--- {{item.fileType}}
     </view>
      <view wx:elif="{{item.fileType == 'silk'}}">
-      <image mode='scaleToFill' style="width:50px; height:50px; background-color: #eeeeee;" src='https://www.mytime.net.cn/file_audio.png'>
+      <image mode='scaleToFill' style="width:50px; height:50px; background-color: #eeeeee;" src='https://www.mytime.net.cn/res/file_audio.png'>
       </image> {{item.fileSize}}--- {{item.fileType}}
     </view>
     <view wx:else>{{item.fileName}}-- {{item.fileSize}}--- {{item.fileType}}</view>

@@ -1,5 +1,5 @@
 <!--pages/video/videorecord.wxml-->
-<image bindtap="videoRecord" style='width:100%;' src='https://www.mytime.net.cn/res/timg2.jpg'></image>
+<image style='width:100%;' src='https://www.mytime.net.cn/res/timg2.jpg'></image>
 <button bindtap="videoRecord">视频记录</button>
 <button bindtap="picRecord">图片记录</button>
 <button bindtap="audioRecord">录音记录</button>
@@ -11,7 +11,7 @@
 <view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
 <!--对话框标题-->
 <view class="dialog-title">
-  上传中<image wx:if="{{isWaiting}}" style='width:16px;height:16px;' src='https://www.mytime.net.cn/res/loading1.gif'></image>
+<text>上传中</text><image wx:if="{{isWaiting}}" style='width:16px;height:16px;' src='https://www.mytime.net.cn/res/loading1.gif'></image>
 </view>
 <!--对话框输入部分-->
 <view class="input-view">

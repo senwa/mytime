@@ -1,0 +1,51 @@
+<view class="container" style="height: {{windowHeight}}px">
+    <!--第一步-->
+    <view wx:if="{{step == 1}}" id="firstStep_Pad" class="container" style="height:auto;">
+        <text class="grayLineHeng" style="margin-top:55rpx" />
+        <view style="width:{{windowWidth}}px;" class="container-hang">
+            <text style="color:#c9c9c9;margin:33rpx 0 33rpx 0; width:460rpx;text-align:center;">国家/地区</text>
+            <text class="grayLineShu" style="height:auto"></text>
+            <text style="color:#000;width:100%;text-align: center;margin-top:33rpx">{{location}}</text>
+        </view>
+        <text class="grayLineHeng" />
+        <view class="container-hang" style="width:{{windowWidth}}px;">
+            <image src="{{icon_phone}}" style="width:49rpx; height: 49rpx; margin:28rpx"/>
+            <input id="input_phoneNum" bindchange="input_phoneNum" style="margin:24rpx 32rpx 0 0;height:49rpx;" placeholder="请输入电话号码" type="number"/>
+        </view>
+        <text class="grayLineHeng" />
+    </view>
+    
+    <!--第二步-->
+    <view wx:if="{{step==2}}" id="secondStep_Pad" class="container" style="height:auto;align-items:flex-start;">
+        <text style="margin:44rpx; font-size:30rpx">验证码已经发送到您的手机\n如长时间没有收到，请点击“重新获取”</text>
+        <text class="grayLineHeng" />
+        <view class="container-hang" style="width:{{windowWidth}}px;">
+            <input bindchange="input_identifyCode" style="margin:24rpx 32rpx 0 0;height:49rpx;" placeholder="请输入验证码" type="number"/>
+        </view>
+        <text class="grayLineHeng" />
+        <button bindtap="reSendPhoneNum" size="mini" style="margin-top:23rpx;margin-right:23rpx">重新获取{{time}}</button>
+    </view>
+
+    <!--第三步-->
+    <view wx:if="{{step==3}}" id="thirdStep_Pad" class="container" style="height:auto;margin-top:23rpx">
+        <text class="grayLineHeng" />
+        <view class="container-hang" style="width:{{windowWidth}}px;">
+            <image src="{{icon_account}}" style="width:49rpx; height: 49rpx; margin:28rpx"/>
+            <input bindchange="input_account" style="margin:24rpx 32rpx 0 0;height:49rpx;" placeholder="请输入账号"/>
+        </view>
+        <text class="grayLineHeng" />
+        <view class="container-hang" style="width:{{windowWidth}}px;">
+            <image src="{{icon_password}}" style="width:49rpx; height: 49rpx; margin:28rpx"/>
+            <input bindchange="input_password" style="margin:24rpx 32rpx 0 0;height:49rpx;" placeholder="请输入密码" password/>
+        </view>
+        <text class="grayLineHeng" />
+        <view class="container-hang" style="width:{{windowWidth}}px;">
+            <image src="{{icon_password}}" style="width:49rpx; height: 49rpx; margin:28rpx"/>
+            <input bindchange="input_rePassword" style="margin:24rpx 32rpx 0 0;height:49rpx;" placeholder="请再次输入密码" password/>
+        </view>
+        <text class="grayLineHeng" />
+    </view>
+
+    <button style="width:{{nextButtonWidth}}px;margin-top:35rpx" 
+    type="primary" size="default" bindtap="nextStep">下一步</button>
+</view>

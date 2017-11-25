@@ -1,14 +1,28 @@
-<!--index.wxml-->
-<view class="container" >
-  <view class="userinfo">
-    <button class="loginBtn" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+<view class="container">
+  <view class="login-icon">
+    <image class="login-img" src="https://www.mytime.net.cn/res/timg5.jpg"></image>
   </view>
-  <view class="usermotto">
-    <button class="beginBtn" wx:if="{{hasUserInfo}}" bindtap="startRecordVideo"> 开启时光之旅>>></button>
-    <text class="user-motto">{{motto}}</text>
+  <view class="login-from">
+
+    <!--账号-->
+    <view class="inputView">
+      <image class="nameImage" src="https://www.mytime.net.cn/res/login_name.png"></image>
+      <label class="loginLab" for='account'>账号</label>
+      <input name='account' class="inputText" placeholder="请输入账号" bindinput="accountInput" focus="true" />
+    </view>
+    <view class="line"></view>
+
+    <!--密码-->
+    <view class="inputView">
+      <image class="keyImage" src="https://www.mytime.net.cn/res/login_pwd.png"></image>
+      <label class="loginLab" for='pwd'>密码</label>
+      <input name='pwd' class="inputText" password="true" placeholder="请输入密码" bindinput="pwdInput" />
+    </view>
+
+    <!--按钮-->
+    <view class="loginBtnView">
+      <button class="loginBtn" type="primary" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="login">登录</button>
+    </view>
+     <button class="registerBtn" type="default" size="mini" loading="{{loading}}" plain="true" disabled="{{disabled}}" bindtap="register">注册</button>
   </view>
 </view>

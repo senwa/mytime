@@ -1,4 +1,6 @@
 // pages/video/videorecord.js
+//获取应用实例
+const app = getApp();
 Page({
 
   /**
@@ -30,7 +32,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (!app.globalData.token){//发现未登录,跳转到登录页面
+      wx.navigateTo({
+        url: "../index/index"
+      })
+    }
   },
 
   /**
@@ -64,9 +70,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  },
+ // onShareAppMessage: function () {},
   showModal: function () {
     // 显示遮罩层
     var animation = wx.createAnimation({
@@ -130,7 +134,7 @@ Page({
     });*/
     var that = this;
     wx.chooseVideo({
-     // count: 1,
+      // count: 1,
       sourceType: ['album', 'camera'],
       //maxDuration: 120,
       //camera: 'back',
@@ -154,19 +158,19 @@ Page({
             });
           }
         });
-        uploadTask.onProgressUpdate((res) => { 
+        uploadTask.onProgressUpdate((res) => {
           var p;
           that.data.uploader = uploadTask;
-          if (res.progress<=99){
+          if (res.progress <= 99) {
             p = res.progress;
             that.data.isWaiting = false;
-          }else{
+          } else {
             p = 99;
-            that.data.isWaiting=true;
-          } 
-          that.setData({ 
-            progressPercent: p, 
-            totalBytesSent: res.totalBytesSent, 
+            that.data.isWaiting = true;
+          }
+          that.setData({
+            progressPercent: p,
+            totalBytesSent: res.totalBytesSent,
             totalBytesExpectedToSend: res.totalBytesExpectedToSend,
             isWaiting: that.data.isWaiting
           });
@@ -182,16 +186,17 @@ Page({
     var that = this;
     wx.chooseImage({
       count: 1,
-      sourceType: [/*'album'*/, 'camera'],
+      sourceType: [/*'album',*/ 'camera'],
       success: function (res) {
         that.showModal();
         var tempFilePaths = res.tempFilePaths
         const uploadTask = wx.uploadFile({
           url: 'https://www.mytime.net.cn/upload',
           filePath: tempFilePaths[0],
+          header: { Authorization: 'time' + app.globalData.token },
           name: 'file',
           formData: {
-            'user': 'test'
+            
           },
           success: function (res) {
             var data = res.data;
@@ -234,9 +239,10 @@ Page({
         const uploadTask = wx.uploadFile({
           url: 'https://www.mytime.net.cn/upload',
           filePath: tempFilePath,
+          header: { Authorization: 'time' + app.globalData.token },
           name: 'file',
           formData: {
-            'user': 'test'
+            
           },
           success: function (res) {
             var data = res.data;
