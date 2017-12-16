@@ -1,15 +1,15 @@
 <!--pages/videoList/videoList.wxml-->
 <scroll-view scroll-y >
   <block wx:for="{{records}}" wx:key="fileName">
-    <view wx:if="{{item.fileType == 1}}">
-      <image mode='scaleToFill' style="width:50px; height:50px; background-color: #eeeeee;" src='https://time.mytime.net.cn:8888/group1/M00/00/00/Co0lgVoZG6-AQnY4ACDPvJXKO1o469_100x100.JPG'>
+    <view wx:if="{{item.filetype == 1}}">
+      <image mode='scaleToFill' style="width:50px; height:50px; background-color: #eeeeee;" src='https://time.mytime.net.cn/{{item.filepath}}'>
       </image> {{item.regdate}}
     </view>
-    <view wx:elif="{{item.fileType == 3}}">
+    <view wx:elif="{{item.filetype == 3}}">
       <image mode='scaleToFill' style="width:50px; height:50px; background-color: #eeeeee;" src='https://www.mytime.net.cn/res/file_mp4.png'>
       </image> {{item.regdate}}
     </view>
-     <view wx:elif="{{item.fileType == 2}}">
+     <view wx:elif="{{item.filetype == 2}}">
       <image mode='scaleToFill' style="width:50px; height:50px; background-color: #eeeeee;" src='https://www.mytime.net.cn/res/file_audio.png'>
       </image> {{item.regdate}}
     </view>
