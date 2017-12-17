@@ -294,5 +294,16 @@ Page({
     if (this.data.uploader){
       this.data.uploader.abort();
     }
+    },
+  clickCalendarbtn: function () {
+    wx.navigateTo({
+      url: '../calendar/calendarGroup'
+    })
+  }, clickScanBtn: function () {
+    wx.scanCode({
+      success: (res) => {
+        console.log(res)
+      }
+    })
   }
 })

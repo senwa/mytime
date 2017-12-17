@@ -4,13 +4,14 @@
     "pages/logs/logs",
     "pages/video/videorecord",
     "pages/videoList/videoList",
-    "pages/register/register"
+    "pages/register/register",
+    "pages/calendar/calendarGroup"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#FFA042",
     "navigationBarTitleText": "时光笔记",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
   },
   "debug": true
 }

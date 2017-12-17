@@ -4,8 +4,11 @@
 <button bindtap="picRecord">图片记录</button>
 <button bindtap="audioRecord">录音记录</button>
 <button bindtap="toRecordList"> 浏览</button>
-<button type="default" bindtap="clickbtn">
-  显示进度条
+<button type="default" bindtap="clickCalendarbtn">
+  日历显示
+</button>
+<button type="default" bindtap="clickScanBtn">
+  扫描
 </button>
 <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
 <view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
