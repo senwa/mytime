@@ -34,6 +34,16 @@ Page({
           if(res.data&&res.data.result==1){
 
             if(res.data && res.data.extData && res.data.extData.length>0){
+              var arrayTemp;
+              for (var i = 0; i < res.data.extData.length; i++){
+                if (res.data.extData[i].filepath){
+                  arrayTemp = res.data.extData[i].filepath.split('.');
+                  if (arrayTemp.length==2){
+                    res.data.extData[i].filepath = arrayTemp[0] + '_' + res.data.extData[i].slavePostfix + '.' + arrayTemp[1];
+                  }
+                }
+              }
+
               this.setData({
                 records: res.data.extData
               });

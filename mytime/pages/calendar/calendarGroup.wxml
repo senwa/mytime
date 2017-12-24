@@ -1,31 +1,24 @@
 <!--pages/calendar/calendarGroup.wxml-->
-
  <view class="calContainer">
-    <view class="calLeft">
-        <view class="calContainerLeft">
-            <view class="calToday">
-              今天
-            </view>
-            <scroll-view class="calDaysScroll">
-                
-            </scroll-view>
-        </view>
+    <view class="calTop">
+      <swiper class='yearSwiper' current="{{curYearIndex}}"   indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+        <block wx:for="{{years}}">
+          <swiper-item>
+            <view class='year_view'>{{item}}年</view>
+          </swiper-item>
+        </block>
+      </swiper>
+      <swiper class='monthSwiper' current='{{curMonthIndex}}'  indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+        <block wx:for="{{months}}">
+          <swiper-item>
+            <view class='year_view'>{{item}}月</view>
+          </swiper-item>
+        </block>
+      </swiper>
+       
     </view>
     <view class="calContent">
-          <view>
-        <view>{{year}}年{{month}}月{{day}}日</view>
-        <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
-          <picker-view-column>
-            <view wx:for="{{years}}" style="line-height: 50px">{{item}}年</view>
-          </picker-view-column>
-          <picker-view-column>
-            <view wx:for="{{months}}" style="line-height: 50px">{{item}}月</view>
-          </picker-view-column>
-          <picker-view-column>
-            <view wx:for="{{days}}" style="line-height: 50px">{{item}}日</view>
-          </picker-view-column>
-        </picker-view>
-      </view>
+
     </view>
  </view>
 

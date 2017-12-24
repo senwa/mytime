@@ -2,18 +2,15 @@
 const date = new Date()
 const years = []
 const months = []
-const days = []
+const curYearIndex = 0;
+const curMonthIndex = 0;
 
 for (let i = 1990; i <= date.getFullYear(); i++) {
   years.push(i)
 }
 
 for (let i = 1; i <= 12; i++) {
-  months.push(i)
-}
-
-for (let i = 1; i <= 31; i++) {
-  days.push(i)
+  months.push(i);
 }
 Page({
 
@@ -22,13 +19,13 @@ Page({
    */
   data: {
     years: years,
-    year: date.getFullYear(),
+    curYearIndex: (years.length-1),
     months: months,
-    month: 2,
-    days: days,
-    day: 2,
-    year: date.getFullYear(),
-    value: [9999, 1, 1],
+    curMonthIndex: date.getMonth(),
+    indicatorDots: false,
+    autoplay: false,
+    interval: 2000,
+    duration: 1000
   },
 
   /**

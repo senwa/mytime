@@ -6,15 +6,45 @@ page {
 .calContainer {
   height: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 0;
   box-sizing: border-box;
   background-color: #f2f2f2;
 }
 
-.calLeft {
+.calTop {
+    display: flex;
+    justify-content:space-around;
+    flex-direction: row;
     border-right:2px solid yellow;
-    width:100px;
+    width:100%;
+}
+
+.year_view{
+  width:100%;
+  text-align: center;
+  color:#FFF;
+
+}
+.yearSwiper{
+  height:30px;width:49%;padding:5px;
+  background-image: url(https://www.mytime.net.cn/res/scBtn2.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  line-height: 40px;
+}
+
+.month_view{
+  width:100%;
+  text-align: center;
+  color:#FFF;
+}
+.monthSwiper{
+  height:30px;width:49%;padding:5px;
+  background-image: url(https://www.mytime.net.cn/res/scBtn2.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  line-height: 40px;
 }
 
 .calContent {
@@ -23,10 +53,10 @@ page {
     position:relative;
 }
 
-.calContainerLeft{
+.calContainerTop{
     height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding: 0;
     box-sizing: border-box;
     background-color: #cfcfcf;
