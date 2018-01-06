@@ -1,45 +1,88 @@
 // pages/calendar/calendarGroup.js
-const date = new Date()
-const years = []
-const months = []
-const curYearIndex = 0;
-const curMonthIndex = 0;
 
-for (let i = 1990; i <= date.getFullYear(); i++) {
-  years.push(i)
-}
+const app = getApp()
+var pageSize = 20;
+var currentPage = 1;
 
-for (let i = 1; i <= 12; i++) {
-  months.push(i);
-}
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    years: years,
-    curYearIndex: (years.length-1),
-    months: months,
-    curMonthIndex: date.getMonth(),
-    indicatorDots: false,
-    autoplay: false,
-    interval: 2000,
-    duration: 1000
+   
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this
+    wx.getSystemInfo({
+      success: function (res) {
+        console.log(res)
+        console.log(res.windowHeight)
+        that.setData({
+          wHeight: res.windowHeight
+        })
+      }
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    if (app.globalData.token) {
+      wx.request({
+        method: 'GET',
+        header: { Authorization: 'time' + app.globalData.token },
+        url: 'https://www.mytime.net.cn/getFileNames',
+        data: { page: 0, pageSize: 20 },
+        success: res => {
+          console.log(res.data);
+          if (res.data && res.data.result == 1) {
+
+            if (res.data && res.data.extData && res.data.extData.length > 0) {
+              var arrayTemp;
+              for (var i = 0; i < res.data.extData.length; i++) {
+                if (res.data.extData[i].filepath) {
+                  arrayTemp = res.data.extData[i].filepath.split('.');
+                  if (arrayTemp.length == 2) {
+                    res.data.extData[i].filepath = arrayTemp[0] + '_' + res.data.extData[i].slavePostfix + '.' + arrayTemp[1];
+                  }
+                }
+              }
+
+              this.setData({
+                records: res.data.extData
+              });
+            }
+          } else {
+            console.error(res);
+            var msg = '';
+            if (res.data.message == "Access Denied") {
+              msg += '您没有权限';
+            }
+
+            wx.showModal({
+              title: '获取失败',
+              content: msg,
+              showCancel: false,
+              success: function (res) {
+                wx.navigateBack({
+                  delta: 1
+                });
+              }
+            });
+          }
+        },
+        fail: function (res) {
+          console.log(res);
+        }
+      });
+    }
   },
 
   /**

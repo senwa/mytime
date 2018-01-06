@@ -5,7 +5,8 @@
     "pages/video/videorecord",
     "pages/videoList/videoList",
     "pages/register/register",
-    "pages/calendar/calendarGroup"
+    "pages/calendar/calendarGroup",
+    "pages/calendar/classify"
   ],
   "window": {
     "backgroundTextStyle": "light",

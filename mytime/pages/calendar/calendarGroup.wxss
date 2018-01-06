@@ -5,6 +5,7 @@ page {
 }
 .calContainer {
   height: 100%;
+  width:100%;
   display: flex;
   flex-direction: column;
   padding: 0;
@@ -12,46 +13,15 @@ page {
   background-color: #f2f2f2;
 }
 
-.calTop {
-    display: flex;
-    justify-content:space-around;
-    flex-direction: row;
-    border-right:2px solid yellow;
-    width:100%;
-}
 
-.year_view{
-  width:100%;
-  text-align: center;
-  color:#FFF;
-
-}
-.yearSwiper{
-  height:30px;width:49%;padding:5px;
-  background-image: url(https://www.mytime.net.cn/res/scBtn2.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  line-height: 40px;
-}
-
-.month_view{
-  width:100%;
-  text-align: center;
-  color:#FFF;
-}
-.monthSwiper{
-  height:30px;width:49%;padding:5px;
-  background-image: url(https://www.mytime.net.cn/res/scBtn2.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  line-height: 40px;
-}
 
 .calContent {
     -webkit-flex: 1;
     flex:1;
     position:relative;
+    background-color: #fff333;
 }
+
 
 .calContainerTop{
     height: 100%;
@@ -61,12 +31,68 @@ page {
     box-sizing: border-box;
     background-color: #cfcfcf;
 }
-.calToday{
-    height:50px;
-    line-height: 50px;
-    text-align: center;
-    align-content: center;
-    vertical-align: center;
-    border-bottom: 2px solid #ccc;
-    background-color: #fff333;
+.calScrollContainer{
+  width:auto;
+  padding:15rpx;
 }
+
+.calDayView{
+  margin-bottom:20rpx;
+  line-height: 280rpx;
+  height:280rpx;
+  border:1px solid #ccc;
+  border-radius: 20rpx;
+  background-color:#FFF;
+  color:#ccc;
+}
+.calImgSwiper{
+  width:100%;
+  height: 100%;
+}
+.calImgSwiperItem{
+  border-bottom:2px dotted #CFCFCF;
+  display: flex;
+  flex-direction: row;
+  flex-wrap:nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+.imgres{
+  width:200rpx;
+  height:200rpx;
+  background-color:#eeeeee;
+  border:2rpx solid #FFF;
+  box-shadow:5rpx 5rpx 5rpx #CCCC66;
+  margin-left:20px;
+}
+.daytext{
+  color:#FF9400;
+  font-family:  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height:60px;
+  font-size:50px;
+  line-height:50px;
+  padding:10px;
+}
+.daytext_detail{
+  display: flex;
+  flex-direction: column;
+  flex-wrap:nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-self:center;
+  margin-top:-4px;
+
+}
+.daytext_detail text{
+  height:18px;
+  line-height: 20px;
+  font-size:16px;
+  color: tan;
+}
+
+.daytext_detail text.daytext_time{
+  font-size: 0.7em;
+  color:gray;
+  padding-top:5px;
+}
+

@@ -1,0 +1,49 @@
+/* pages/calendar/classify.wxss */
+page {
+  height: 100%;
+  width: 100%;
+  background-image: url(https://www.mytime.net.cn/res/timg3.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.calTop {
+    height: 100px;
+    display: flex;
+    justify-content:space-around;
+    flex-direction: row;
+    width:100%;
+    position:absolute;
+    bottom:10px;
+}
+
+.year_view{
+  width:100%;
+  text-align: center;
+  color:#FFF;
+
+}
+.yearSwiper{
+  height:40px;
+  width:40%;
+  padding:5px;
+  background-image: url(https://www.mytime.net.cn/res/scBtn2.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  line-height: 50px;
+}
+
+.month_view{
+  width:100%;
+  text-align: center;
+  color:#FFF;
+}
+.monthSwiper{
+  height:40px;
+  width:40%;
+  padding:5px;
+  background-image: url(https://www.mytime.net.cn/res/scBtn2.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  line-height: 50px;
+}

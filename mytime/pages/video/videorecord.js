@@ -297,7 +297,7 @@ Page({
     },
   clickCalendarbtn: function () {
     wx.navigateTo({
-      url: '../calendar/calendarGroup'
+      url: '../calendar/classify'
     })
   }, clickScanBtn: function () {
     wx.scanCode({

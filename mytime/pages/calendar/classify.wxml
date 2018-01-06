@@ -1,0 +1,16 @@
+<view class="calTop">
+  <swiper class='yearSwiper' current="{{curYearIndex}}" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{years}}">
+      <swiper-item>
+        <view class='year_view'>{{item}}年</view>
+      </swiper-item>
+    </block>
+  </swiper>
+  <swiper class='monthSwiper' current='{{curMonthIndex}}' indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{months}}">
+      <swiper-item>
+        <view class='year_view'>{{item}}月</view>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>

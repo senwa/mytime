@@ -1,24 +1,35 @@
 <!--pages/calendar/calendarGroup.wxml-->
  <view class="calContainer">
-    <view class="calTop">
-      <swiper class='yearSwiper' current="{{curYearIndex}}"   indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-        <block wx:for="{{years}}">
-          <swiper-item>
-            <view class='year_view'>{{item}}年</view>
-          </swiper-item>
-        </block>
-      </swiper>
-      <swiper class='monthSwiper' current='{{curMonthIndex}}'  indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-        <block wx:for="{{months}}">
-          <swiper-item>
-            <view class='year_view'>{{item}}月</view>
-          </swiper-item>
-        </block>
-      </swiper>
+      <scroll-view class='calScrollContainer'>
+        <view class='calDayView'>
+          <swiper class='calImgSwiper' indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="3000" duration="3000">
+              <swiper-item class='calImgSwiperItem'>
+                <image class='imgres' src='https://time.mytime.net.cn/group1/M00/00/00/Co0lgVpJ46mACxsxAAQECRYhmgU614_150x150.jpg'>
+              </image>
+                <text class='daytext'>30</text>
+                <view class='daytext_detail'><text>星期六</text><text class='daytext_time'>21:09:33</text></view>
+              </swiper-item>
+              <swiper-item class='calImgSwiperItem'>
+                <image class='imgres' src='https://time.mytime.net.cn/group1/M00/00/00/Co0lgVozqRWAH2J-AATBgqGzUxU881_150x150.jpg'>
+              </image>
+               <text>2017 12 30</text>
+              </swiper-item>
+          </swiper>
+        </view>
        
-    </view>
-    <view class="calContent">
-
-    </view>
+        <view class='calDayView'>2017 12 26</view>
+        <view class='calDayView'>2017 12 25</view>
+        <view class='calDayView'>2017 12 24</view>
+        <view class='calDayView'>2017 12 23</view>
+        <view class='calDayView'>2017 12 22</view>
+        <view class='calDayView'>2017 12 21</view>
+        <view class='calDayView'>2017 12 20</view>
+        <view class='calDayView'>2017 12 19</view>
+        <view class='calDayView'>2017 12 18</view>
+        <view class='calDayView'>2017 12 17</view>
+        <view class='calDayView'>2017 12 16</view>
+        <view class='calDayView'>2017 12 15</view>
+        <view class='calDayView'>2017 12 14</view>
+    </scroll-view> 
  </view>
 
