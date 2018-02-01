@@ -1,4 +1,6 @@
 // pages/video/videorecord.js
+var amapFile = require('amap-wx.js');
+var lng, lat, weatherJson;
 //获取应用实例
 const app = getApp();
 Page({
@@ -18,7 +20,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
+    var that = this;
+    var myAmapFun = new amapFile.AMapWX({ key: '3555ca126bf4ec5f05672e7e23b1cade' });
+    myAmapFun.getWeather({
+      success: function (data) {
+        console.log(data);
+        weatherJson = data;
+        that.setData({
+          weather: weatherJson
+        });
+        //成功回调
+      },
+      fail: function (info) {
+        //失败回调
+        console.log(info)
+        weatherJson=null;
+      }
+    })
   },
 
   /**
@@ -32,6 +51,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this;
+    wx.getLocation({
+      type: 'gcj02',
+      success: function (res) {
+        console.log(res);
+        lng = res.longitude;
+        lat = res.latitude;
+      },
+      fail: function () {
+        lng = null;
+        lat = null;
+      }
+    })
+
+
     if (!app.globalData.token){//发现未登录,跳转到登录页面
       wx.navigateTo({
         url: "../index/index"
@@ -141,13 +175,19 @@ Page({
       success: function (res) {
         that.showModal();
         var tempFilePath = res.tempFilePath;
+        var extdata={
+          'lng': lng,
+          'lat': lat
+        }
+        if (weatherJson){
+          extdata['weather'] = JSON.stringify(weatherJson);
+        }
         const uploadTask = wx.uploadFile({
           url: 'https://www.mytime.net.cn/upload',
+          header: { Authorization: 'time' + app.globalData.token },
           filePath: tempFilePath,
           name: 'file',
-          formData: {
-            'user': 'test'
-          },
+          formData: extdata,
           success: function (res) {
             var data = res.data;
             that.hideModal();
@@ -190,14 +230,19 @@ Page({
       success: function (res) {
         that.showModal();
         var tempFilePaths = res.tempFilePaths
+        var extdata = {
+          'lng': lng,
+          'lat': lat
+        }
+        if (weatherJson) {
+          extdata['weather'] = JSON.stringify(weatherJson);
+        }
         const uploadTask = wx.uploadFile({
           url: 'https://www.mytime.net.cn/upload',
           filePath: tempFilePaths[0],
           header: { Authorization: 'time' + app.globalData.token },
           name: 'file',
-          formData: {
-            
-          },
+          formData: extdata,
           success: function (res) {
             var data = res.data;
             that.hideModal();
@@ -236,14 +281,19 @@ Page({
     wx.startRecord({
       success: function (res) {
         var tempFilePath = res.tempFilePath;
+        var extdata = {
+          'lng': lng,
+          'lat': lat
+        }
+        if (weatherJson) {
+          extdata['weather'] = JSON.stringify(weatherJson);
+        }
         const uploadTask = wx.uploadFile({
           url: 'https://www.mytime.net.cn/upload',
           filePath: tempFilePath,
           header: { Authorization: 'time' + app.globalData.token },
           name: 'file',
-          formData: {
-            
-          },
+          formData: extdata,
           success: function (res) {
             var data = res.data;
             that.hideModal();

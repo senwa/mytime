@@ -2,7 +2,7 @@
 <scroll-view scroll-y >
   <block wx:for="{{records}}" wx:key="fileName">
     <view wx:if="{{item.filetype == 1}}">
-      <image mode='scaleToFill' style="width:50px; height:50px; background-color: #eeeeee;" src='https://time.mytime.net.cn/{{item.filepath}}'>
+      <image bindtap='preViewImg' data-list="{{imgurls}}" data-src="{{item.largefilepath}}" mode='scaleToFill' style="width:50px; height:50px; background-color: #eeeeee;" src='https://time.mytime.net.cn/{{item.filepath}}'>
       </image> {{item.regdate}}
     </view>
     <view wx:elif="{{item.filetype == 3}}">

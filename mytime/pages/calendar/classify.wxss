@@ -14,7 +14,7 @@ page {
     flex-direction: row;
     width:100%;
     position:absolute;
-    bottom:10px;
+    bottom:10%;
 }
 
 .year_view{
@@ -25,7 +25,7 @@ page {
 }
 .yearSwiper{
   height:40px;
-  width:40%;
+  width:25%;
   padding:5px;
   background-image: url(https://www.mytime.net.cn/res/scBtn2.png);
   background-repeat: no-repeat;
@@ -40,10 +40,27 @@ page {
 }
 .monthSwiper{
   height:40px;
-  width:40%;
+  width:25%;
   padding:5px;
   background-image: url(https://www.mytime.net.cn/res/scBtn2.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
   line-height: 50px;
+}
+.beginBtn{
+  margin-bottom:20px;
+  background-color: green;
+  border:2px double #fff;
+  color:cornsilk;
+  position: absolute;
+  bottom:5%;
+  width:100%;
+}
+.usermotto {
+  width:100%;
+  text-align: center;
+  color:#ffffff;
+  font-size:13px;
+  position: absolute;
+  bottom:15px;
 }

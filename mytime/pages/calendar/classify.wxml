@@ -1,12 +1,12 @@
 <view class="calTop">
-  <swiper class='yearSwiper' current="{{curYearIndex}}" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+  <swiper class='yearSwiper' current="{{curYearIndex}}" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="yearChange">
     <block wx:for="{{years}}">
       <swiper-item>
         <view class='year_view'>{{item}}年</view>
       </swiper-item>
     </block>
   </swiper>
-  <swiper class='monthSwiper' current='{{curMonthIndex}}' indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+  <swiper class='monthSwiper' current='{{curMonthIndex}}' indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="monthChange">
     <block wx:for="{{months}}">
       <swiper-item>
         <view class='year_view'>{{item}}月</view>
@@ -14,3 +14,5 @@
     </block>
   </swiper>
 </view>
+<button class="beginBtn" bindtap='goCalGroup'> 开启时光之旅>>></button>
+<text class="usermotto">每天记录生命中的一点点,在未来的日子里慢慢品味</text>

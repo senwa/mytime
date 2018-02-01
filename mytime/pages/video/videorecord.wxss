@@ -66,3 +66,21 @@
   margin-left: 15%;
   margin-bottom: 20px;
 }
+
+.weather_container{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+ width:300rpx;
+height:250rpx;
+  color: #fff;
+  font-size: 12px;
+  padding-top: 10rpx;
+  padding-left: 10rpx;
+}
+.weather_container text{
+  display: block;
+  margin: 5px;
+}

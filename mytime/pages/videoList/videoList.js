@@ -30,22 +30,26 @@ Page({
         url: 'https://www.mytime.net.cn/getFileNames', 
         data: { page: 0, pageSize: 20},
         success: res =>  {
-          console.log(res.data);
           if(res.data&&res.data.result==1){
 
             if(res.data && res.data.extData && res.data.extData.length>0){
               var arrayTemp;
+              var imgurls=[];
+              var baseUrl ="https://time.mytime.net.cn/";
               for (var i = 0; i < res.data.extData.length; i++){
                 if (res.data.extData[i].filepath){
+                  res.data.extData[i].largefilepath = baseUrl + res.data.extData[i].filepath;
+                  imgurls.push(baseUrl+res.data.extData[i].filepath);
                   arrayTemp = res.data.extData[i].filepath.split('.');
                   if (arrayTemp.length==2){
                     res.data.extData[i].filepath = arrayTemp[0] + '_' + res.data.extData[i].slavePostfix + '.' + arrayTemp[1];
                   }
                 }
               }
-
+              
               this.setData({
-                records: res.data.extData
+                records: res.data.extData,
+                imgurls: imgurls
               });
             }
           }else{
@@ -114,5 +118,15 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  preViewImg:function(event){
+    var src = event.currentTarget.dataset.src;//获取data-src
+    var imgList = event.currentTarget.dataset.list;//获取data-list
+    console.log(event.currentTarget.dataset);
+    //图片预览
+    wx.previewImage({
+      current: src, // 当前显示图片的http链接
+      urls: imgList // 需要预览的图片http链接列表
+    })
   }
 })

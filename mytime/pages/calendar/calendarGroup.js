@@ -1,9 +1,22 @@
 // pages/calendar/calendarGroup.js
 
 const app = getApp()
+const baseUrl = "https://time.mytime.net.cn/";
 var pageSize = 20;
 var currentPage = 1;
+const weekDayDic = {
+  1:'星期日',
+  2:'星期一',
+  3:'星期二',
+  4:'星期三',
+  5:'星期四',
+  6:'星期五',
+  7:'星期六'
+}
+function getWeekDay(numStr){
 
+  return weekDayDic[numStr] ? weekDayDic[numStr] : numStr;
+}
 
 Page({
 
@@ -34,20 +47,25 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    console.log(app.globalData.year);
+    console.log(app.globalData.month);
     if (app.globalData.token) {
       wx.request({
         method: 'GET',
         header: { Authorization: 'time' + app.globalData.token },
         url: 'https://www.mytime.net.cn/getFileNames',
-        data: { page: 0, pageSize: 20 },
+        data: { page: 0, pageSize: 20 },//, yearStr: app.globalData.year, monthStr:app.globalData.month
         success: res => {
-          console.log(res.data);
+          //console.log(res.data);
           if (res.data && res.data.result == 1) {
 
             if (res.data && res.data.extData && res.data.extData.length > 0) {
-              var arrayTemp;
+              var arrayTemp; var imgurls = [];
               for (var i = 0; i < res.data.extData.length; i++) {
+                res.data.extData[i].weekdayStr = getWeekDay(res.data.extData[i].weekdayStr);
                 if (res.data.extData[i].filepath) {
+                  res.data.extData[i].largefilepath = baseUrl + res.data.extData[i].filepath;
+                  imgurls.push(baseUrl + res.data.extData[i].filepath);
                   arrayTemp = res.data.extData[i].filepath.split('.');
                   if (arrayTemp.length == 2) {
                     res.data.extData[i].filepath = arrayTemp[0] + '_' + res.data.extData[i].slavePostfix + '.' + arrayTemp[1];
@@ -56,6 +74,7 @@ Page({
               }
 
               this.setData({
+                imgurls: imgurls,
                 records: res.data.extData
               });
             }
@@ -125,6 +144,14 @@ Page({
    */
   onShareAppMessage: function () {
   
+  }, preViewImg: function (event) {
+    var src = event.currentTarget.dataset.src;//获取data-src
+    var imgList = event.currentTarget.dataset.list;//获取data-list
+    //图片预览
+    wx.previewImage({
+      current:src, 
+      urls: imgList 
+    })
   },
   takePhoto() {
     const ctx = wx.createCameraContext()
@@ -139,13 +166,5 @@ Page({
   },
   error(e) {
     console.log(e.detail)
-  },
-  bindChange: function (e) {
-    const val = e.detail.value
-    this.setData({
-      year: this.data.years[val[0]],
-      month: this.data.months[val[1]],
-      day: this.data.days[val[2]]
-    })
   }
 })

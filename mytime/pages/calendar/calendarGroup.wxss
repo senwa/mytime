@@ -44,19 +44,15 @@ page {
   border-radius: 20rpx;
   background-color:#FFF;
   color:#ccc;
-}
-.calImgSwiper{
-  width:100%;
-  height: 100%;
-}
-.calImgSwiperItem{
   border-bottom:2px dotted #CFCFCF;
   display: flex;
   flex-direction: row;
   flex-wrap:nowrap;
   justify-content: flex-start;
   align-items: center;
+
 }
+
 .imgres{
   width:200rpx;
   height:200rpx;

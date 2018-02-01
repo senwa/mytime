@@ -1,16 +1,10 @@
 // pages/calendar/classify.js
+const app = getApp()
 const date = new Date()
 const years = []
-const months = []
-const curYearIndex = 0;
-const curMonthIndex = 0;
-for (let i = 1990; i <= date.getFullYear(); i++) {
-  years.push(i)
-}
-
-for (let i = 1; i <= 12; i++) {
-  months.push(i);
-}
+const year2MonthsArr = {}
+var curYearIndex = 0;
+var curMonthIndex = 0;
 
 Page({
 
@@ -18,10 +12,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    years: years,
-    curYearIndex: (years.length - 1),
-    months: months,
-    curMonthIndex: date.getMonth(),
     indicatorDots: false,
     autoplay: false,
     interval: 2000,
@@ -39,7 +29,70 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    if (app.globalData.token) {
+      wx.request({
+        method: 'GET',
+        header: { Authorization: 'time' + app.globalData.token },
+        url: 'https://www.mytime.net.cn/getDaysMonthsOrYears',
+        data: { flag: 'yearMonth'},
+        success: res => {
+          console.log(res.data);
+          if (res.data && res.data.result == 1) {
+            if (res.data && res.data.extData && res.data.extData.length > 0) {
+              //years.push(i)
+              var len = res.data.extData.length;
+              var dd = res.data.extData;
+              var tmpArr;
+              var mTmpArr;
+              for (var i = 0; i < len;i++){
+                tmpArr = dd[i].split('#');
+                years.push(tmpArr[0]);
+                year2MonthsArr[tmpArr[0]] = [];
+                mTmpArr = tmpArr[1].split(",");
+                for (var m = 0; m < mTmpArr.length;m++){
+                  year2MonthsArr[tmpArr[0]].push(mTmpArr[m]);
+                }
+              }
+
+              this.setData({
+                years: years,
+                months: year2MonthsArr[years[0]]
+              });
+            }
+          } else {
+            console.error(res);
+            var msg = '';
+            if (res.data.message == "Access Denied") {
+              msg += '您没有权限';
+            }
+
+            wx.showModal({
+              title: '获取日期失败',
+              content: msg,
+              showCancel: false,
+              success: function (res) {
+                wx.navigateBack({
+                  delta: 1
+                });
+              }
+            });
+          }
+        },
+        fail: function (res) {
+          console.log(res);
+          wx.showModal({
+            title: '获取日期失败',
+            content: msg,
+            showCancel: false,
+            success: function (res) {
+              wx.navigateBack({
+                delta: 1
+              });
+            }
+          });
+        }
+      });
+    }
   },
 
   /**
@@ -82,5 +135,22 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  yearChange:function(e){
+    curYearIndex = e.detail.current;
+    this.setData({
+      years: years,
+      months: year2MonthsArr[years[curYearIndex]]
+    })
+  },
+  monthChange: function (e) {
+    curMonthIndex = e.detail.current;
+  },
+  goCalGroup:function(){
+    app.globalData.year = years[curYearIndex];
+    app.globalData.month = year2MonthsArr[years[curYearIndex]][curMonthIndex];
+    wx.navigateTo({
+      url: 'calendarGroup'
+    });
   }
 })
