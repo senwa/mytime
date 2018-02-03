@@ -50,7 +50,7 @@ page {
   flex-wrap:nowrap;
   justify-content: flex-start;
   align-items: center;
-
+position:relative;
 }
 
 .imgres{
@@ -91,4 +91,35 @@ page {
   color:gray;
   padding-top:5px;
 }
+.weather_view{
+  font-size:12px;
+  height:100px;
+width:100px;
+display:flex;
+flex-direction:column;
+flex-wrap:nowrap;
+justify-content:flex-start;
+align-items:flex-start;
+align-self:center;
+position:relative;
 
+}
+ .area{
+position:absolute;
+top:5px;
+right:10px;
+font-size:12px;
+height:13px;
+line-height:15px;
+
+
+}
+ .weather{
+ position:absolute;
+bottom:10px;
+font-size:12px;
+right:5px;
+height:13px;
+line-height:15px;
+
+}

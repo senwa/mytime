@@ -60,21 +60,30 @@ Page({
           if (res.data && res.data.result == 1) {
 
             if (res.data && res.data.extData && res.data.extData.length > 0) {
-              var arrayTemp; var imgurls = [];
+              var arrayTemp; var wJson;
               for (var i = 0; i < res.data.extData.length; i++) {
                 res.data.extData[i].weekdayStr = getWeekDay(res.data.extData[i].weekdayStr);
+                if (res.data.extData[i].weather){
+                  try{
+                    wJson = JSON.parse(res.data.extData[i].weather);
+                    if (wJson && wJson.liveData){
+                      res.data.extData[i].area = wJson.liveData.province + " " + wJson.liveData.city;
+                      res.data.extData[i].weatherStr = wJson.liveData.weather + " " + wJson.liveData.temperature + "℃ " + wJson.liveData.winddirection + "风 " + wJson.liveData.windpower + "级 湿度" + wJson.liveData.humidity+"%";
+                    }
+                  }catch(e){}
+                 
+                }
+
                 if (res.data.extData[i].filepath) {
                   res.data.extData[i].largefilepath = baseUrl + res.data.extData[i].filepath;
-                  imgurls.push(baseUrl + res.data.extData[i].filepath);
                   arrayTemp = res.data.extData[i].filepath.split('.');
                   if (arrayTemp.length == 2) {
                     res.data.extData[i].filepath = arrayTemp[0] + '_' + res.data.extData[i].slavePostfix + '.' + arrayTemp[1];
                   }
                 }
               }
-
+              console.log(res.data);
               this.setData({
-                imgurls: imgurls,
                 records: res.data.extData
               });
             }

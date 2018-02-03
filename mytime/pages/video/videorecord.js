@@ -44,13 +44,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
     var that = this;
     wx.getLocation({
       type: 'gcj02',
@@ -66,11 +59,18 @@ Page({
     })
 
 
-    if (!app.globalData.token){//发现未登录,跳转到登录页面
+    if (!app.globalData.token) {//发现未登录,跳转到登录页面
       wx.navigateTo({
         url: "../index/index"
       })
     }
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+  
   },
 
   /**
