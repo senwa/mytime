@@ -82,7 +82,6 @@ Page({
                   }
                 }
               }
-              console.log(res.data);
               this.setData({
                 records: res.data.extData
               });
