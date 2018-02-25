@@ -5,7 +5,7 @@ const baseUrl = "https://time.mytime.net.cn/";
 var pageSize = 20;
 var currentPage = 1;
 var oldDis,oldScale=1;
-var winWidth;
+var winWidth, winHeight;
 const weekDayDic = {
   1:'星期日',
   2:'星期一',
@@ -39,8 +39,10 @@ Page({
         console.log(res)
         //console.log(res.windowHeight)
         winWidth = res.windowWidth;// * res.pixelRatio-60
+        winHeight = res.windowHeight;
         that.setData({
-          scaleWidth:winWidth
+          scaleWidth:winWidth,
+          winHeight: winHeight
         });
       }
     })
@@ -190,7 +192,7 @@ Page({
         }
         var newScale = oldScale + 0.0001 * (distance-oldDis);
         oldScale = newScale;
-        if (newScale < 0.9) { newScale=0.9}
+        if (newScale < 0.9) { newScale=1}
         this.setData({
           scaleWidth:newScale * winWidth
         });
