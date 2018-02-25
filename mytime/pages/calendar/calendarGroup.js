@@ -4,6 +4,8 @@ const app = getApp()
 const baseUrl = "https://time.mytime.net.cn/";
 var pageSize = 20;
 var currentPage = 1;
+var oldDis,oldScale=1;
+var winWidth;
 const weekDayDic = {
   1:'星期日',
   2:'星期一',
@@ -35,10 +37,11 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         console.log(res)
-        console.log(res.windowHeight)
+        //console.log(res.windowHeight)
+        winWidth = res.windowWidth;// * res.pixelRatio-60
         that.setData({
-          wHeight: res.windowHeight
-        })
+          scaleWidth:winWidth
+        });
       }
     })
   },
@@ -162,10 +165,12 @@ Page({
     })
   },
   showPreview: function (event){
+    oldScale = 1;
     var src = event.currentTarget.dataset.src;//获取data-src
     this.setData({
       largefilepath:src,
-      isShowPreview:true   
+      isShowPreview:true,
+      scaleWidth: winWidth 
     });
   },
   hidePreview:function(){
@@ -173,11 +178,33 @@ Page({
       isShowPreview: false
     });
   },
-  preimgtmover: function (event){
-    var xMove = e.touches[1].clientX - e.touches[0].clientX;
-    var yMove = e.touches[1].clientY - e.touches[0].clientY;
-    distance = Math.sqrt(xMove * xMove + yMove * yMove);
-
+  preimgtmover: function (e){
+    if (e.touches){
+      if (e.touches.length>1){
+        var xMove = e.touches[1].clientX - e.touches[0].clientX;
+        var yMove = e.touches[1].clientY - e.touches[0].clientY;
+        var distance = Math.sqrt(xMove * xMove + yMove * yMove);
+        console.log(distance);
+        if (!oldDis){
+          oldDis = distance;
+        }
+        var newScale = oldScale + 0.0001 * (distance-oldDis);
+        oldScale = newScale;
+        if (newScale < 0.9) { newScale=0.9}
+        this.setData({
+          scaleWidth:newScale * winWidth
+        });
+      }else{
+        //oldScale=1;
+        oldDis=0;
+      }
+    } else {
+      oldDis = 0;
+    }
+   
+  },
+  preimgtmoverEnd:function(e){
+    oldDis = 0;
   },
   takePhoto() {
     const ctx = wx.createCameraContext()

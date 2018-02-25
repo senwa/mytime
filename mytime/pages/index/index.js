@@ -29,7 +29,7 @@ Page({
       wx.showToast({
         title: '自动登录',
         icon: 'loading',
-        duration: 1500
+        duration: 2000
       });
       //刷新token
       wx.request({
@@ -38,6 +38,7 @@ Page({
         url: 'https://www.mytime.net.cn/refresh',
         data: { Authorization:app.globalData.token},
         success: res => {
+          wx.hideToast();
           if (res.data&&res.data.message!='Access Denied') {
 
             app.globalData.token = res.data.token;

@@ -26,6 +26,6 @@
       </block>
     </scroll-view> 
  </view>
-<view class="previewcontainer" bindtap="hidePreview" wx:if="{{isShowPreview}}">
- <image bindtouchmove='preimgtmover' class='previewImg' mode='aspectFit' src='{{largefilepath}}'></image>
+<view bindtouchend='preimgtmoverEnd' bindtouchmove='preimgtmover'  class="previewcontainer" bindtap="hidePreview" wx:if="{{isShowPreview}}">
+ <image class='previewImg' mode='widthFix' src='{{largefilepath}}' style="width:{{scaleWidth}}px;"></image>
 </view>
