@@ -1,23 +1,23 @@
 <!--pages/calendar/calendarGroup.wxml-->
- <view class="calContainer">
+ <view class="calContainer" style="{{isShowPreview?'height:100%;overflow:hidden':''}}">
       <scroll-view class='calScrollContainer'>
      <block wx:for="{{records}}" wx:key="fileName">    
         <view class='calDayView' wx:if="{{item.filetype == 1}}">
-              <image class='imgres' bindtap='preViewImg'  data-src="{{item.largefilepath}}"  src='https://time.mytime.net.cn/{{item.filepath}}'>
+              <image lazy-load='true' class='imgres' bindtap='showPreview'  data-src="{{item.largefilepath}}"  src='https://time.mytime.net.cn/{{item.filepath}}'>
               </image>
                 <text class='daytext'>{{item.dayStr}}</text>
                 <view class='daytext_detail'><text>{{item.weekdayStr}}</text><text class='daytext_time'>{{item.regdate}}</text></view>
                  <text class='area'>{{item.area}}</text><text class='weather'>{{item.weatherStr}}</text>
         </view>
           <view class='calDayView' wx:if="{{item.filetype == 2}}">
-              <image class='imgres' src='https://www.mytime.net.cn/res/file_audio.png'>
+              <image lazy-load='true' class='imgres' src='https://www.mytime.net.cn/res/file_audio.png'>
               </image>
                <text class='daytext'>{{item.dayStr}}</text>
                 <view class='daytext_detail'><text>{{item.weekdayStr}}</text><text class='daytext_time'>{{item.regdate}}</text></view>
                  <text class='area'>{{item.area}}</text><text class='weather'>{{item.weatherStr}}</text>
         </view>
           <view class='calDayView' wx:if="{{item.filetype == 3}}">
-              <image class='imgres' src='https://www.mytime.net.cn/res/file_mp4.png'>
+              <image lazy-load='true' class='imgres' src='https://www.mytime.net.cn/res/file_mp4.png'>
               </image>
                 <text class='daytext'>{{item.dayStr}}</text>
                 <view class='daytext_detail'><text>{{item.weekdayStr}}</text><text class='daytext_time'>{{item.regdate}}</text></view>
@@ -26,4 +26,6 @@
       </block>
     </scroll-view> 
  </view>
-
+<view class="previewcontainer" bindtap="hidePreview" wx:if="{{isShowPreview}}">
+ <image bindtouchmove='preimgtmover' class='previewImg' mode='aspectFit' src='{{largefilepath}}'></image>
+</view>

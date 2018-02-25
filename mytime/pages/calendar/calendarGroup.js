@@ -161,6 +161,24 @@ Page({
       urls: imgList 
     })
   },
+  showPreview: function (event){
+    var src = event.currentTarget.dataset.src;//获取data-src
+    this.setData({
+      largefilepath:src,
+      isShowPreview:true   
+    });
+  },
+  hidePreview:function(){
+    this.setData({
+      isShowPreview: false
+    });
+  },
+  preimgtmover: function (event){
+    var xMove = e.touches[1].clientX - e.touches[0].clientX;
+    var yMove = e.touches[1].clientY - e.touches[0].clientY;
+    distance = Math.sqrt(xMove * xMove + yMove * yMove);
+
+  },
   takePhoto() {
     const ctx = wx.createCameraContext()
     ctx.takePhoto({

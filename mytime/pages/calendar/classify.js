@@ -71,9 +71,12 @@ Page({
               content: msg,
               showCancel: false,
               success: function (res) {
-                wx.navigateBack({
-                  delta: 1
-                });
+                //wx.navigateBack({
+                //  delta: 1
+                //});
+                wx.navigateTo({
+                  url: '../index/index',
+                })
               }
             });
           }

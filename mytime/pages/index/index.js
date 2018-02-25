@@ -29,10 +29,43 @@ Page({
       wx.showToast({
         title: '自动登录',
         icon: 'loading',
-        duration: 2000
+        duration: 1500
       });
-      wx.navigateTo({
-        url: '../video/videorecord'
+      //刷新token
+      wx.request({
+        method: 'GET',
+        header: { Authorization: 'time' + app.globalData.token },
+        url: 'https://www.mytime.net.cn/refresh',
+        data: { Authorization:app.globalData.token},
+        success: res => {
+          if (res.data&&res.data.message!='Access Denied') {
+
+            app.globalData.token = res.data.token;
+            //存储token到本地
+            try {
+              wx.setStorageSync('token', res.data.token);
+            } catch (e) {
+              console.log(e);
+            }
+            // 完成注册
+            wx.showToast({
+              title: '登录成功',
+              icon: 'success'
+            });
+            wx.navigateTo({
+              url: '../video/videorecord'
+            });
+          } else {
+            wx.showModal({
+              title: '自动登录失败',
+              showCancel: false,
+              content:'请手动登录',
+            });
+          }
+        },
+        fail: function (res) {
+          console.log(res);
+        }
       });
     }
   },
