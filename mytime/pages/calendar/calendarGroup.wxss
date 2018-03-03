@@ -135,3 +135,21 @@ line-height:15px;
   position: absolute;
   border-bottom:1px solid #cfcfcf;
 }
+
+.videoContainer{
+  background-color:#000;
+  text-align: center;
+  opacity:0.9;
+}
+.videoContainer video{
+  margin-top:10px;
+  border-bottom:1px solid #ccc;
+  border-top:1px solid #ccc;
+}
+
+.silkPlayView{
+  text-align: center;
+}
+.silkPlayView img{
+  width:30%;
+}

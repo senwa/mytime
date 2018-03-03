@@ -168,16 +168,18 @@ Page({
     });*/
     var that = this;
     wx.chooseVideo({
-      // count: 1,
       sourceType: ['album', 'camera'],
-      //maxDuration: 120,
-      //camera: 'back',
+      maxDuration: 60,
+      camera: 'back',
       success: function (res) {
         that.showModal();
         var tempFilePath = res.tempFilePath;
         var extdata={
           'lng': lng,
-          'lat': lat
+          'lat': lat,
+          'width': res.width,
+          'height': res.height,
+          'duration': res.duration
         }
         if (weatherJson){
           extdata['weather'] = JSON.stringify(weatherJson);
@@ -269,9 +271,9 @@ Page({
             totalBytesExpectedToSend: res.totalBytesExpectedToSend,
             isWaiting: that.data.isWaiting
           });
-          console.log('上传进度', res.progress);
-          console.log('已经上传的数据长度', res.totalBytesSent);
-          console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend);
+          //console.log('上传进度', res.progress);
+          //console.log('已经上传的数据长度', res.totalBytesSent);
+          //console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend);
         });
       }
     });

@@ -6,6 +6,7 @@ var pageSize = 20;
 var currentPage = 1;
 var oldDis,oldScale=1;
 var winWidth, winHeight;
+var silkTempPath;
 const weekDayDic = {
   1:'星期日',
   2:'星期一',
@@ -39,7 +40,7 @@ Page({
         console.log(res)
         //console.log(res.windowHeight)
         winWidth = res.windowWidth;// * res.pixelRatio-60
-        winHeight = res.windowHeight;
+        winHeight = res.windowHeight-10;
         that.setData({
           scaleWidth:winWidth,
           winHeight: winHeight
@@ -52,9 +53,12 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    console.log(app.globalData.year);
-    console.log(app.globalData.month);
+    //console.log(app.globalData.year);
+    //console.log(app.globalData.month);
     if (app.globalData.token) {
+      // 使用 wx.createAudioContext 获取 audio 上下文 context
+      this.audioCtx = wx.createAudioContext('myAudio')
+      
       wx.request({
         method: 'GET',
         header: { Authorization: 'time' + app.globalData.token },
@@ -82,10 +86,10 @@ Page({
                 if (res.data.extData[i].filepath) {
                   res.data.extData[i].largefilepath = baseUrl + res.data.extData[i].filepath;
                   arrayTemp = res.data.extData[i].filepath.split('.');
-                  if (arrayTemp.length == 2) {
+                  if (arrayTemp.length == 2 && res.data.extData[i].slavePostfix) {
                     res.data.extData[i].filepath = arrayTemp[0] + '_' + res.data.extData[i].slavePostfix + '.' + arrayTemp[1];
                   }
-                }
+                }      
               }
               this.setData({
                 records: res.data.extData
@@ -186,7 +190,6 @@ Page({
         var xMove = e.touches[1].clientX - e.touches[0].clientX;
         var yMove = e.touches[1].clientY - e.touches[0].clientY;
         var distance = Math.sqrt(xMove * xMove + yMove * yMove);
-        console.log(distance);
         if (!oldDis){
           oldDis = distance;
         }
@@ -207,6 +210,95 @@ Page({
   },
   preimgtmoverEnd:function(e){
     oldDis = 0;
+  },
+  showAudio: function (event){
+    var src = event.currentTarget.dataset.src;//获取data-src
+    var that = this;
+    this.setData({
+      isShowAudio: true
+    });
+    if (src.indexOf('silk')>0){
+      this.setData({
+        isSilk: true,
+        autioPicSrc: 'https://www.mytime.net.cn/res/loading1.gif'
+      });
+      //先下载到本地后才能播放
+      const downloadTask = wx.downloadFile({
+        url: src,
+        success: function (res) {
+          silkTempPath = res.tempFilePath;
+          that.setData({
+            autioPicSrc: 'https://www.mytime.net.cn/res/file_audio.png'
+          });
+          wx.playVoice({
+            filePath: res.tempFilePath
+          })
+        }
+      })
+
+      downloadTask.onProgressUpdate((res) => {
+        console.log('下载进度', res.progress)
+        console.log('已经下载的数据长度', res.totalBytesWritten)
+        console.log('预期需要下载的数据总长度', res.totalBytesExpectedToWrite)
+      })
+
+    }else{
+      that.setData({
+        audio_largefilepath: src
+      });
+    }
+
+
+    //downloadTask.abort() // 取消下载任务
+  },
+  playSilk:function(){
+    wx.playVoice({
+      filePath: silkTempPath
+    })
+  },
+  pauseSilk:function(){
+    wx.pauseVoice();
+  },
+  stopSilk:function(){
+    wx.stopVoice();
+  },
+  hidePreviewAudio:function(){
+    wx.stopVoice();
+    this.setData({
+      isShowAudio: false
+    });
+  },
+  showVideo: function (event){
+    var src = event.currentTarget.dataset.src;//获取data-src
+    var w = event.currentTarget.dataset.w;//获取width
+    var h = event.currentTarget.dataset.h;//获取height
+
+    var videoWidth = w ? w:winWidth;
+    var videoHeight = h ? h:(winHeight-10);
+ 
+
+    this.setData({
+      video_largefilepath: src,
+      isShowVideo: true,
+      videoWidth: videoWidth,
+      videoHeight: videoHeight
+    });
+  }, 
+  hidePreviewVideo:function(){
+    this.setData({
+      isShowVideo: false
+    });
+  },
+  audioPlay: function () {
+    
+    //this.audioCtx.setSrc('')
+    this.audioCtx.play()
+  },
+  audioPause: function () {
+    this.audioCtx.pause()
+  },
+  audioStart: function () {
+    this.audioCtx.seek(0)
   },
   takePhoto() {
     const ctx = wx.createCameraContext()

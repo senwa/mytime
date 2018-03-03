@@ -13,7 +13,7 @@
         <text class='weather'>{{item.weatherStr}}</text>
       </view>
       <view class='calDayView' wx:if="{{item.filetype == 2}}">
-        <image lazy-load='true' class='imgres' src='https://www.mytime.net.cn/res/file_audio.png'>
+        <image lazy-load='true' class='imgres' bindtap='showAudio' data-src="{{item.largefilepath}}"src='https://www.mytime.net.cn/res/file_audio.png'>
         </image>
         <text class='daytext'>{{item.dayStr}}</text>
         <view class='daytext_detail'>
@@ -24,7 +24,7 @@
         <text class='weather'>{{item.weatherStr}}</text>
       </view>
       <view class='calDayView' wx:if="{{item.filetype == 3}}">
-        <image lazy-load='true' class='imgres' src='https://www.mytime.net.cn/res/file_mp4.png'>
+        <image lazy-load='true' class='imgres' bindtap='showVideo'data-w='{{item.width}}' data-h='{{item.height}}' data-src="{{item.largefilepath}}" src='https://www.mytime.net.cn/res/file_mp4.png'>
         </image>
         <text class='daytext'>{{item.dayStr}}</text>
         <view class='daytext_detail'>
@@ -39,3 +39,21 @@
 <view bindtouchend='preimgtmoverEnd' bindtouchmove='preimgtmover' class="previewcontainer" bindtap="hidePreview" wx:if="{{isShowPreview}}">
   <image class='previewImg' mode='widthFix' src='{{largefilepath}}' style="width:{{scaleWidth}}px;"></image>
 </view>
+<view  class="previewcontainer videoContainer" bindtap="hidePreviewVideo" wx:if="{{isShowVideo}}">
+  <video id="myVideo" src='{{video_largefilepath}}' objectFit='fill'  controls='true' autoplay  style="width:{{videoWidth}}px;height:{{videoHeight}}px"></video>
+</view>
+<view  class="previewcontainer audioContainer" bindtap="hidePreviewAudio" wx:if="{{isShowAudio}}">
+  <view class='silkPlayView' wx:if="{{isSilk}}">
+    <image  mode='aspectFit' src='{{autioPicSrc}}'></image>
+    <button type="primary" catchtap="playSilk">播放</button>
+    <button type="primary" catchtap="pauseSilk">暂停</button>
+    <button type="primary" catchtap="stopSilk">停止</button>
+  </view>
+  <view  wx:if="{{!isSilk}}">
+    <audio poster="https://www.mytime.net.cn/res/file_audio.png" name="录音" author="未知" src="{{audio_largefilepath}}" id="myAudio" controls></audio>
+    <button type="primary" catchtap="playSilk1">播放1</button>
+    <button type="primary" catchtap="pauseSilk1">暂停1</button>
+    <button type="primary" catchtap="stopSilk1">停止1</button>
+  </view>
+</view>
+
