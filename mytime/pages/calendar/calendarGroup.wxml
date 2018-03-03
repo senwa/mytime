@@ -1,5 +1,5 @@
 <!--pages/calendar/calendarGroup.wxml-->
-  <scroll-view class='calScrollContainer' scroll-y="true" style='height:{{winHeight}}px'>
+  <scroll-view class='calScrollContainer' scroll-y="true" style='height:{{winHeight}}px' bindscrolltolower='loadMore'>
     <block wx:for="{{records}}" wx:key="fileName">
       <view class='calDayView' wx:if="{{item.filetype == 1}}">
         <image lazy-load='true' class='imgres' bindtap='showPreview' data-src="{{item.largefilepath}}" src='https://time.mytime.net.cn/{{item.filepath}}'>

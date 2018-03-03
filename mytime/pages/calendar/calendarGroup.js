@@ -2,11 +2,12 @@
 
 const app = getApp()
 const baseUrl = "https://time.mytime.net.cn/";
-var pageSize = 20;
-var currentPage = 1;
+var pageSize = 10;
+var currentPage = 0;
 var oldDis,oldScale=1;
 var winWidth, winHeight;
 var silkTempPath;
+var files=[];
 const weekDayDic = {
   1:'星期日',
   2:'星期一',
@@ -20,6 +21,77 @@ function getWeekDay(numStr){
 
   return weekDayDic[numStr] ? weekDayDic[numStr] : numStr;
 }
+
+function loadFileNames(that) {
+  wx.request({
+    method: 'GET',
+    header: { Authorization: 'time' + app.globalData.token },
+    url: 'https://www.mytime.net.cn/getFileNames',
+    data: { page: currentPage, pageSize: pageSize, yearStr: app.globalData.year, monthStr: app.globalData.month },
+    success: res => {
+      //console.log(res.data);
+      if (res.data && res.data.result == 1) {
+
+        if (res.data && res.data.extData && res.data.extData.length > 0) {
+          currentPage++;
+          var arrayTemp; var wJson;
+          for (var i = 0; i < res.data.extData.length; i++) {
+            res.data.extData[i].weekdayStr = getWeekDay(res.data.extData[i].weekdayStr);
+            if (res.data.extData[i].weather) {
+              try {
+                wJson = JSON.parse(res.data.extData[i].weather);
+                if (wJson && wJson.liveData) {
+                  res.data.extData[i].area = wJson.liveData.province + " " + wJson.liveData.city;
+                  res.data.extData[i].weatherStr = wJson.liveData.weather + " " + wJson.liveData.temperature + "℃ " + wJson.liveData.winddirection + "风 " + wJson.liveData.windpower + "级 湿度" + wJson.liveData.humidity + "%";
+                }
+              } catch (e) { }
+
+            }
+
+            if (res.data.extData[i].filepath) {
+              res.data.extData[i].largefilepath = baseUrl + res.data.extData[i].filepath;
+              arrayTemp = res.data.extData[i].filepath.split('.');
+              if (arrayTemp.length == 2 && res.data.extData[i].slavePostfix) {
+                res.data.extData[i].filepath = arrayTemp[0] + '_' + res.data.extData[i].slavePostfix + '.' + arrayTemp[1];
+              }
+            }
+          }
+          files = files.concat(res.data.extData);
+          that.setData({
+            records: files
+          });
+        }else{
+          wx.showToast({
+            title: '没有更多内容了',
+            icon: 'none',
+            duration:1000
+          });
+        }
+      } else {
+        console.error(res);
+        var msg = '';
+        if (res.data.message == "Access Denied") {
+          msg += '您没有权限';
+        }
+
+        wx.showModal({
+          title: '获取失败',
+          content: msg,
+          showCancel: false,
+          success: function (res) {
+            wx.navigateBack({
+              delta: 1
+            });
+          }
+        });
+      }
+    },
+    fail: function (res) {
+      console.log(res);
+    }
+  });
+}
+
 
 Page({
 
@@ -48,79 +120,22 @@ Page({
       }
     })
   },
-
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
+  * 生命周期函数--监听页面初次渲染完成
+  */
   onReady: function () {
     //console.log(app.globalData.year);
     //console.log(app.globalData.month);
     if (app.globalData.token) {
       // 使用 wx.createAudioContext 获取 audio 上下文 context
       this.audioCtx = wx.createAudioContext('myAudio')
-      
-      wx.request({
-        method: 'GET',
-        header: { Authorization: 'time' + app.globalData.token },
-        url: 'https://www.mytime.net.cn/getFileNames',
-        data: { page: 0, pageSize: 20 },//, yearStr: app.globalData.year, monthStr:app.globalData.month
-        success: res => {
-          //console.log(res.data);
-          if (res.data && res.data.result == 1) {
+      loadFileNames(this);
 
-            if (res.data && res.data.extData && res.data.extData.length > 0) {
-              var arrayTemp; var wJson;
-              for (var i = 0; i < res.data.extData.length; i++) {
-                res.data.extData[i].weekdayStr = getWeekDay(res.data.extData[i].weekdayStr);
-                if (res.data.extData[i].weather){
-                  try{
-                    wJson = JSON.parse(res.data.extData[i].weather);
-                    if (wJson && wJson.liveData){
-                      res.data.extData[i].area = wJson.liveData.province + " " + wJson.liveData.city;
-                      res.data.extData[i].weatherStr = wJson.liveData.weather + " " + wJson.liveData.temperature + "℃ " + wJson.liveData.winddirection + "风 " + wJson.liveData.windpower + "级 湿度" + wJson.liveData.humidity+"%";
-                    }
-                  }catch(e){}
-                 
-                }
-
-                if (res.data.extData[i].filepath) {
-                  res.data.extData[i].largefilepath = baseUrl + res.data.extData[i].filepath;
-                  arrayTemp = res.data.extData[i].filepath.split('.');
-                  if (arrayTemp.length == 2 && res.data.extData[i].slavePostfix) {
-                    res.data.extData[i].filepath = arrayTemp[0] + '_' + res.data.extData[i].slavePostfix + '.' + arrayTemp[1];
-                  }
-                }      
-              }
-              this.setData({
-                records: res.data.extData
-              });
-            }
-          } else {
-            console.error(res);
-            var msg = '';
-            if (res.data.message == "Access Denied") {
-              msg += '您没有权限';
-            }
-
-            wx.showModal({
-              title: '获取失败',
-              content: msg,
-              showCancel: false,
-              success: function (res) {
-                wx.navigateBack({
-                  delta: 1
-                });
-              }
-            });
-          }
-        },
-        fail: function (res) {
-          console.log(res);
-        }
-      });
     }
   },
-
+  loadMore:function(){
+    loadFileNames(this);
+  },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -153,7 +168,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+      
   },
 
   /**
