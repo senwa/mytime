@@ -124,6 +124,8 @@ Page({
   * 生命周期函数--监听页面初次渲染完成
   */
   onReady: function () {
+    currentPage = 0;
+    files = [];
     //console.log(app.globalData.year);
     //console.log(app.globalData.month);
     if (app.globalData.token) {
