@@ -280,8 +280,13 @@ Page({
   },
   audioRecord: function () {
     var that = this;
+    wx.showLoading({
+      title:'正在录音',
+      mask:true
+    });
     wx.startRecord({
       success: function (res) {
+        wx.hideLoading();
         var tempFilePath = res.tempFilePath;
         var extdata = {
           'lng': lng,
