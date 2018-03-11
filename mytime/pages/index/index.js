@@ -120,5 +120,10 @@ Page({
   },
   pwdInput: function (e) {
     pwd = e.detail.value
+  },
+  getBackPassPage:function(){
+    wx.navigateTo({
+      url: 'getpassword'
+    })
   }
 })

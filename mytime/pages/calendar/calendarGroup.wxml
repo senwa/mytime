@@ -9,7 +9,7 @@
           <text>{{item.weekdayStr}}</text>
           <text class='daytext_time'>{{item.regdate}}</text>
         </view>
-        <text class='area'>{{item.area}}</text>
+        <text class='area' bindtap='showMapLocation' data-lng='{{item.longitude}}' data-lat='{{item.latitude}}' data-msg='{{item.area}}'>{{item.area}}</text>
         <text class='weather'>{{item.weatherStr}}</text>
       </view>
       <view class='calDayView' wx:if="{{item.filetype == 2}}">

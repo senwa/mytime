@@ -8,7 +8,7 @@
     <view class="inputView">
       <image class="nameImage" src="https://www.mytime.net.cn/res/login_name.png"></image>
       <label class="loginLab" for='account'>账号</label>
-      <input name='account' class="inputText" placeholder="请输入账号" bindinput="accountInput" focus="true" />
+      <input name='account' class="inputText" placeholder="请输入账号/电话号码" bindinput="accountInput" focus="true" />
     </view>
     <view class="line"></view>
 
@@ -24,5 +24,6 @@
       <button class="loginBtn" type="primary" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="login">登录</button>
     </view>
      <button class="registerBtn" type="default" size="mini" loading="{{loading}}" plain="true" disabled="{{disabled}}" bindtap="register">注册</button>
+     <button class="getBackPassBtn" type="default" size="mini" loading="{{loading}}" plain="true" disabled="{{disabled}}" bindtap="getBackPassPage">找回密码</button>
   </view>
 </view>

@@ -1,15 +1,12 @@
 <!--pages/video/videorecord.wxml-->
 <image style='width:100%;' src='https://www.mytime.net.cn/res/timg.jpg'></image>
-<button bindtap="videoRecord">视频记录</button>
-<button bindtap="picRecord">图片记录</button>
-<button bindtap="audioRecord">录音记录</button>
-<button bindtap="toRecordList"> 浏览</button>
+<button bindtap="videoRecord">录像</button>
+<button bindtap="picRecord">拍照</button>
+<button bindtap="audioRecord">录音</button>
 <button type="default" bindtap="clickCalendarbtn">
-  日历显示
+  浏览
 </button>
-<button type="default" bindtap="clickScanBtn">
-  扫描
-</button>
+
 <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
 <view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
   <!--对话框标题-->

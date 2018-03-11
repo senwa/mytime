@@ -29,7 +29,7 @@ function loadFileNames(that) {
     url: 'https://www.mytime.net.cn/getFileNames',
     data: { page: currentPage, pageSize: pageSize, yearStr: app.globalData.year, monthStr: app.globalData.month },
     success: res => {
-      //console.log(res.data);
+      console.log(res.data);
       if (res.data && res.data.result == 1) {
 
         if (res.data && res.data.extData && res.data.extData.length > 0) {
@@ -330,5 +330,23 @@ Page({
   },
   error(e) {
     console.log(e.detail)
+  },
+  showMapLocation:function(event){
+    var lng = event.currentTarget.dataset.lng;//获取data-lng
+    var lat = event.currentTarget.dataset.lat;//获取data-lat
+    if (lng&&lat){
+      wx.openLocation({
+        type: 'gcj02',
+        latitude: parseFloat(lat),
+        longitude: parseFloat(lng)
+      })
+    }else{
+      wx.showToast({
+        title: '没有经纬度数据',
+        icon: 'fail',
+        duration: 1000
+      });
+    }
+   
   }
 })

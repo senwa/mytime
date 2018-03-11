@@ -94,3 +94,11 @@ page {
   text-decoration: underline;
   color: blue !important;
 }
+.getBackPassBtn {
+  position: absolute;
+  bottom: 1%;
+  left: 1%;
+  border: none !important;
+  text-decoration: underline;
+  color: gray !important;
+}

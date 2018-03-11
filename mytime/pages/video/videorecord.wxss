@@ -69,13 +69,14 @@
 
 .weather_container{
   position: absolute;
-  top: 0;
+  top:220rpx;
+
   bottom: 0;
-  left: 0;
-  right: 0;
+  right:-110rpx;
+
  width:300rpx;
 height:250rpx;
-  color: #fff;
+  color: #000;
   font-size: 12px;
   padding-top: 10rpx;
   padding-left: 10rpx;
@@ -83,4 +84,11 @@ height:250rpx;
 .weather_container text{
   display: block;
   margin: 5px;
+}
+button{
+  width:50%;
+  height:300rpx;
+  line-height: 300rpx;
+  display: inline-block;
+ 
 }
