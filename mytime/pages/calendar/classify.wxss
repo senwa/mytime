@@ -2,7 +2,7 @@
 page {
   height: 100%;
   width: 100%;
-  background-image: url(https://www.mytime.net.cn/res/timg3.jpg);
+  background-image: url(https://www.mytime.net.cn/res/jjbg2.jpg);
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }

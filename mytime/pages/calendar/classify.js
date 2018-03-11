@@ -143,7 +143,8 @@ Page({
     curYearIndex = e.detail.current;
     this.setData({
       years: years,
-      months: year2MonthsArr[years[curYearIndex]]
+      months: year2MonthsArr[years[curYearIndex]],
+      curMonthIndex: 0
     })
   },
   monthChange: function (e) {
