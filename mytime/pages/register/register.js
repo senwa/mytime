@@ -10,8 +10,8 @@ var account=null,phoneNum = null, identifyCode = null, password = null, rePasswo
 
 Page({
   data: {
-    windowWidth: 0,
-    windoeHeight: 0,
+    windowWidth: 250,
+    windoeHeight: 250,
     icon_phone: "https://www.mytime.net.cn/res/icon_phone.png",
     icon_account: "https://www.mytime.net.cn/res/login_name.png",
     icon_password: "https://www.mytime.net.cn/res/login_pwd.png",
@@ -21,10 +21,11 @@ Page({
   },
   onLoad: function () {
     var that = this
+    currentTime = -1 //倒计时的事件（单位：s）
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          windowWidth: res.windowWidth,
+          windowWidth: res.windowWidth < 200 ? 250 : res.windowWidth,
           windowHeight: res.windowHeight,
           nextButtonWidth: res.windowWidth - 20,
           reSendBtn:'获取验证码',
@@ -122,6 +123,7 @@ Page({
   },
   register:function(){
     var that = this
+
     if (!phoneNum) {
       wx.showModal({
         title: '提示',
@@ -159,7 +161,7 @@ Page({
           icon: 'success'
         });
         wx.navigateTo({
-          url: '/video/videorecord'
+          url: '../video/videorecord'
         });
       } else {
         wx.showModal({
@@ -174,6 +176,21 @@ Page({
       });
     }
 
+  },
+  showContract:function(){
+    wx.downloadFile({
+      url: 'https://www.mytime.net.cn/readme.pdf',
+      success: function (res) {
+        console.log(res);
+        var filePath = res.tempFilePath
+        wx.openDocument({
+          filePath: filePath,
+          success: function (res) {
+            console.log('打开文档成功')
+          }
+        })
+      }
+    })
   }
 })
 

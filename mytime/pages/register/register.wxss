@@ -6,3 +6,7 @@
 input{
   font-size: 13px;
 }
+text{
+   font-size: 13px;
+   color:blue;
+}

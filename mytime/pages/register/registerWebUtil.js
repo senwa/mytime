@@ -16,7 +16,6 @@ function submitPassword(account,password,phoneNum,identify,callback) {
       'content-type': 'application/json' // 默认值
     },
     success: res => {
-      console.log(res);
       callback(res);
     },
     fail: function (res) {

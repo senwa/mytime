@@ -58,6 +58,17 @@ Page({
                 years: years,
                 months: year2MonthsArr[years[0]]
               });
+            }else{
+              wx.showModal({
+                title: '提示',
+                content: "您没有上传任何记录,请先上传记录!",
+                showCancel: false,
+                success: function (res) {
+                  wx.navigateBack({
+                    delta: 1
+                  });
+                }
+              });
             }
           } else {
             console.error(res);
