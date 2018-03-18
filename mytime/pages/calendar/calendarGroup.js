@@ -237,7 +237,7 @@ Page({
     if (src.indexOf('silk')>0){
       this.setData({
         isSilk: true,
-        autioPicSrc: 'https://www.mytime.net.cn/res/loading1.gif'
+        autioPicSrc: 'https://www.mytime.net.cn/res/file_audio.png'
       });
       //先下载到本地后才能播放
       const downloadTask = wx.downloadFile({

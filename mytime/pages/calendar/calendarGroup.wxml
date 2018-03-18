@@ -39,8 +39,12 @@
 <view bindtouchend='preimgtmoverEnd' bindtouchmove='preimgtmover' class="previewcontainer" bindtap="hidePreview" wx:if="{{isShowPreview}}">
   <image class='previewImg' mode='widthFix' src='{{largefilepath}}' style="width:{{scaleWidth}}px;"></image>
 </view>
-<view  class="previewcontainer videoContainer" bindtap="hidePreviewVideo" wx:if="{{isShowVideo}}">
-  <video id="myVideo" src='{{video_largefilepath}}' objectFit='fill'  controls='true' autoplay  style="width:{{videoWidth}}px;height:{{videoHeight}}px"></video>
+<view  class="previewcontainer videoContainer"  wx:if="{{isShowVideo}}">
+  <video id="myVideo" src='{{video_largefilepath}}' objectFit='fill'  controls='true' autoplay  style="width:{{videoWidth}}px;height:{{videoHeight}}px">
+    <cover-view bindtap="hidePreviewVideo" class="closePreVideo">
+      <cover-image class="img" src="https://www.mytime.net.cn/res/closeIcon.png" />
+    </cover-view>
+  </video>
 </view>
 <view  class="previewcontainer audioContainer" bindtap="hidePreviewAudio" wx:if="{{isShowAudio}}">
   <view class='silkPlayView' wx:if="{{isSilk}}">

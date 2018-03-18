@@ -211,7 +211,7 @@ Page({
         wx.showModal({
           title: '重置成功',
           showCancel: false,
-          content: res.data.message,
+          content: '即将自动登录...',
           success: function (res) {
             if (res.confirm) {
               wx.redirectTo({

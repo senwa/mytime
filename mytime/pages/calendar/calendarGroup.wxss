@@ -153,3 +153,11 @@ line-height:15px;
 .silkPlayView img{
   width:30%;
 }
+.closePreVideo{
+  position:absolute;
+  z-index:999;
+  left:20px;
+  top:20px;
+  width:30px;
+  height:30px;
+}
